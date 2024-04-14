@@ -22,6 +22,9 @@ public class CompteBancaire implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public CompteBancaire() {
+    }
+
     public String getNom() {
         return nom;
     }
