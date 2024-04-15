@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/template_default.xhtml">
+
+            <ui:define name="top">
+                Transfert d'argent
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <h:panelGrid columns="3">
+                        Id compte source:
+                        <h:inputText id="sourceId" value="#{TransfertBean.idCompteSource}" required="true"/>
+                        <h:message for="sourceId" style="color: red"/>
+
+                        Id compte destination:
+                        <h:inputText id="destinationId" value="#{TransfertBean.idCompteDestination}" required="true"/>
+                        <h:message for="destinationId" style="color: red"/>
+
+                        Montant à transférer:
+                        <h:inputText id="montant" value="#{TransfertBean.montant}" required="true">
+                            <f:convertNumber type="number"/>
+                        </h:inputText>
+                        <h:message for="montant" style="color: red"/>
+                    </h:panelGrid>
+
+                    <h:commandButton value="Transférer" action="#{TransfertBean.transferer}" />
+
+                </h:form>
+
+                <h:messages globalOnly="true" style="color: red"/>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

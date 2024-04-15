@@ -14,7 +14,6 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 import tpraharimanantena.entity.CompteBancaire;
 
-
 @DataSourceDefinition(
         className = "com.mysql.cj.jdbc.MysqlDataSource",
         name = "java:app/jdbc/banque",
@@ -37,7 +36,7 @@ import tpraharimanantena.entity.CompteBancaire;
 @ApplicationScoped
 public class GestionnaireCompte {
 
-   @PersistenceContext(unitName = "banquePU")
+    @PersistenceContext(unitName = "banquePU")
     private EntityManager em;
 
     @Transactional
@@ -46,12 +45,29 @@ public class GestionnaireCompte {
     }
 
     public List<CompteBancaire> getAllComptes() {
-    TypedQuery<CompteBancaire> query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
-    return query.getResultList();
-}
+        TypedQuery<CompteBancaire> query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
+        return query.getResultList();
 
+    }
 
-   
-    
-    
+    @Transactional
+    public void transferer(CompteBancaire source, CompteBancaire destination, double montant) {
+        if (source != null && destination != null) {
+            if (source.getSolde() >= montant) {
+                source.retirer((int) montant);
+                destination.deposer((int) montant);
+                em.merge(source);
+                em.merge(destination);
+            } else {
+                throw new IllegalArgumentException("Le solde du compte source est insuffisant pour effectuer le transfert.");
+            }
+        } else {
+            throw new IllegalArgumentException("L'un des comptes spécifiés n'existe pas.");
+        }
+    }
+
+    public CompteBancaire getCompteById(Long id) {
+        return em.find(CompteBancaire.class, id);
+    }
+
 }
