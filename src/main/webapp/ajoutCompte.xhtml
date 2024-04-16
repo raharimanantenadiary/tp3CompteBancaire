@@ -15,17 +15,12 @@
             <ui:define name="content">
                <h:form id="form">
                     <h:panelGrid columns="3">
-                        Nom : 
-                        <h:inputText id="source" size="3" value="#{ajoutCompte.nom}" required="true"
-                                     converterMessage="" />
-                        <h:message for="source" />
-                        
-                        Solde : 
-                        <h:inputText id="montant" size="3" value="#{ajoutCompte.solde}" required="true"
-                                     converterMessage="Le solde est un nombre entier" />
-                        <h:message for="montant" />
+                        Nom : <h:inputText id="nom" value="#{ajoutCompte.nom}"/>
+                        <h:message for="nom"/>
+                        Solde : <h:inputText id="solde" value="#{ajoutCompte.solde}" required="true" validatorMessage="Solde invalide, doit être un entier" />
+                        <h:message for="solde"/>
+                        <h:commandButton id="valider" value="Ajouter" action="#{ajoutCompte.ajouter()}"/>
                     </h:panelGrid>
-                    <h:commandButton value="Ajouter" action="#{ajoutCompte.ajouter()}" />
                 </h:form>
                 <h:messages/>
             </ui:define>
