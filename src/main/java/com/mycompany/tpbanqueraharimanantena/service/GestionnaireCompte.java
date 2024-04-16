@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package tpraharimanantena.service;
+package com.mycompany.tpbanqueraharimanantena.service;
 
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -12,7 +12,7 @@ import jakarta.transaction.Transactional;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
-import tpraharimanantena.entity.CompteBancaire;
+import com.mycompany.tpbanqueraharimanantena.entity.CompteBancaire;
 
 @DataSourceDefinition(
         className = "com.mysql.cj.jdbc.MysqlDataSource",
@@ -48,6 +48,11 @@ public class GestionnaireCompte {
         TypedQuery<CompteBancaire> query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
         return query.getResultList();
 
+    }
+
+    public long nbComptes() {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM CompteBancaire c", Long.class);
+        return query.getSingleResult();
     }
 
     @Transactional

@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
  */
-package tpraharimanantena.jsf;
+package com.mycompany.tpbanqueraharimanantena.jsf;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import tpraharimanantena.entity.CompteBancaire;
-import tpraharimanantena.service.GestionnaireCompte;
+import com.mycompany.tpbanqueraharimanantena.entity.CompteBancaire;
+import com.mycompany.tpbanqueraharimanantena.service.GestionnaireCompte;
 
 /**
  *

@@ -5,16 +5,13 @@
 package com.mycompany.tpbanqueraharimanantena.config;
 
 import jakarta.inject.Inject;
-import tpraharimanantena.service.GestionnaireCompte;
-import tpraharimanantena.entity.CompteBancaire;
+import com.mycompany.tpbanqueraharimanantena.service.GestionnaireCompte;
+import com.mycompany.tpbanqueraharimanantena.entity.CompteBancaire;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
 import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletContextAttributeEvent;
-import java.util.List;
-
 /**
  *
  * @author Diary
@@ -31,13 +28,17 @@ public class Init {
 
     @PostConstruct
     public void init(@Observes @Initialized(ApplicationScoped.class) ServletContext context) {
-        System.out.println("Initialisation de l'application...");
+       System.out.println("Initialisation de l'application...");
 
-        System.out.println("Création des comptes...");
-        gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000));
-        gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000));
-        gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000));
-        gestionnaireCompte.creerCompte(new CompteBancaire("George Harrison", 100000));
-        System.out.println("Comptes créés avec succès.");
+        if (gestionnaireCompte.nbComptes() == 0) {
+            System.out.println("Aucun compte trouvé dans la base de données. Création des comptes...");
+            gestionnaireCompte.creerCompte(new CompteBancaire("John Lennon", 150000));
+            gestionnaireCompte.creerCompte(new CompteBancaire("Paul McCartney", 950000));
+            gestionnaireCompte.creerCompte(new CompteBancaire("Ringo Starr", 20000));
+            gestionnaireCompte.creerCompte(new CompteBancaire("George Harrison", 100000));
+            System.out.println("Comptes créés avec succès.");
+        } else {
+            System.out.println("Des comptes sont déjà présents dans la base de données.");
+        }
     }
 }

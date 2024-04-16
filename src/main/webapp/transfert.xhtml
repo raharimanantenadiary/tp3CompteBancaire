@@ -30,12 +30,10 @@
                         </h:inputText>
                         <h:message for="montant" style="color: red"/>
                     </h:panelGrid>
-
                     <h:commandButton value="Transférer" action="#{TransfertBean.transferer}" />
-
+                    <h:outputText value="#{TransfertBean.message}" style="color: red" />
                 </h:form>
-
-                <h:messages globalOnly="true" style="color: red"/>
+                <h:messages/>
             </ui:define>
 
 
