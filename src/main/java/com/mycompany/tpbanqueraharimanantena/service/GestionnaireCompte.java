@@ -43,6 +43,11 @@ public class GestionnaireCompte {
     public void creerCompte(CompteBancaire compte) {
         em.persist(compte);
     }
+    
+    @Transactional
+    public CompteBancaire update(CompteBancaire compteBancaire) {
+        return em.merge(compteBancaire);
+    }
 
     public List<CompteBancaire> getAllComptes() {
         TypedQuery<CompteBancaire> query = em.createQuery("SELECT c FROM CompteBancaire c", CompteBancaire.class);
@@ -73,6 +78,28 @@ public class GestionnaireCompte {
 
     public CompteBancaire getCompteById(Long id) {
         return em.find(CompteBancaire.class, id);
+    }
+    
+    /**
+     * Dépôt d'argent sur un compte bancaire.
+     * @param compteBancaire
+     * @param montant 
+     */
+    @Transactional
+    public void deposer(CompteBancaire compteBancaire, int montant) {
+      compteBancaire.deposer(montant);
+      update(compteBancaire);
+    }
+    
+    /**
+     * Retrait d'argent sur un compte bancaire.
+     * @param compteBancaire
+     * @param montant 
+     */
+    @Transactional
+    public void retirer(CompteBancaire compteBancaire, int montant) {
+      compteBancaire.retirer(montant);
+      update(compteBancaire);
     }
 
 }
