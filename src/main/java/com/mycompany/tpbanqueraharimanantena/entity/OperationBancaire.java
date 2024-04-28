@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 /**
@@ -24,6 +25,9 @@ public class OperationBancaire implements Serializable {
     private String description;
     private LocalDateTime dateOperation;
     private int montant;
+    
+     @ManyToOne
+    private CompteBancaire compteBancaire;
 
     public LocalDateTime getDateOperation() {
         return dateOperation;
