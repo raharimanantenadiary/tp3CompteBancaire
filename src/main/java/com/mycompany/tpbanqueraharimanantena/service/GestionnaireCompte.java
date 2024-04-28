@@ -50,7 +50,7 @@ public class GestionnaireCompte {
     }
 
     public List<CompteBancaire> getAllComptes() {
-        TypedQuery<CompteBancaire> query = em.createQuery("SELECT c FROM CompteBancaire c ", CompteBancaire.class);
+        TypedQuery<CompteBancaire> query = em.createQuery("SELECT DISTINCT c FROM CompteBancaire c join fetch c.operations", CompteBancaire.class);
         return query.getResultList();
 
     }
