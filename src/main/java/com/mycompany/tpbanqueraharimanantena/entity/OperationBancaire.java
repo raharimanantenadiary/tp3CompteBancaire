@@ -59,6 +59,11 @@ public class OperationBancaire implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    @Override
+    public String toString() {
+        return "com.mycompany.tpbanqueraharimanantena.entity.CompteBancaire[ id=" + id + " ]";
+    }
 
     @Override
     public int hashCode() {
